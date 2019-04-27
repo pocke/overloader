@@ -55,4 +55,24 @@ class OverloaderTest < Minitest::Test
     assert_equal :y1, i.y(1)
     assert_equal :y2, i.y(1, 2)
   end
+
+  def test_overload_with_block
+    klass = Class.new do
+      extend Overloader
+
+      overload do
+        def x(&block)
+          block.call
+        end
+
+        def x(a)
+          :x2
+        end
+      end
+    end
+
+    i = klass.new
+    assert_equal :x1, i.x { :x1 }
+    assert_equal :x2, i.x(1)
+  end
 end

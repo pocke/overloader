@@ -11,7 +11,6 @@ module Overloader
       @proc = proc
     end
 
-    # TODO: support &block
     def define_overload
       ast = RubyVM::AbstractSyntaxTree.of(@proc)
       methods = {}
@@ -38,9 +37,9 @@ module Overloader
 
       methods.each do |name, indexes|
         @klass.class_eval <<~RUBY
-          def #{name}(*args)
+          def #{name}(*args, &block)
             #{indexes.map do |index|
-              "return __#{name}_#{index}(*args) if __#{name}_#{index}_checker(*args)"
+              "return __#{name}_#{index}(*args, &block) if __#{name}_#{index}_checker(*args)"
             end.join("\n")}
             raise ArgumentError
           end
