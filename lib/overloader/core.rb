@@ -27,7 +27,9 @@ module Overloader
           rescue ArgumentError
             false
           end
+        RUBY
 
+        @klass.class_eval <<~RUBY, absolute_path, def_node.first_lineno
           def __#{name}_#{index}(#{args.to_source(absolute_path)})
           #{body.to_source(absolute_path)}
           end
