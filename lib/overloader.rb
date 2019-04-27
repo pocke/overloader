@@ -1,6 +1,9 @@
 require "overloader/version"
+require 'overloader/ast_ext'
+require 'overloader/core'
 
 module Overloader
-  class Error < StandardError; end
-  # Your code goes here...
+  def overload(&block)
+    Core.define_overload(self, block)
+  end
 end
