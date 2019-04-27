@@ -18,9 +18,11 @@ module Overloader
         args = def_node.method_args
         body = def_node.method_body
         name = def_node.method_name
+        args_source = args.to_source(absolute_path)
+        args_source = "" if args_source == "(" # RubyVM::AST's bug?
 
         @klass.class_eval <<~RUBY
-          def __#{name}_#{index}_checker_inner(#{args.to_source(absolute_path)}) end
+          def __#{name}_#{index}_checker_inner(#{args_source}) end
           def __#{name}_#{index}_checker(*args)
             __#{name}_#{index}_checker_inner(*args)
             true
@@ -30,7 +32,7 @@ module Overloader
         RUBY
 
         @klass.class_eval <<~RUBY, absolute_path, def_node.first_lineno
-          def __#{name}_#{index}(#{args.to_source(absolute_path)})
+          def __#{name}_#{index}(#{args_source})
           #{body.to_source(absolute_path)}
           end
         RUBY
