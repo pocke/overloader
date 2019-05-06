@@ -3,7 +3,7 @@ module Overloader
     using AstExt
 
     def self.define_overload(klass, proc)
-      self.new(klass, proc).define_overload
+      new(klass, proc).define_overload
     end
 
     def initialize(klass, proc)
