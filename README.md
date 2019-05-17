@@ -2,6 +2,8 @@
 
 Overload for Ruby
 
+# DO NOT USE THIS LIBRARY FOR PRODUCTION
+
 ## Installation
 
 Add this line to your application's Gemfile:
