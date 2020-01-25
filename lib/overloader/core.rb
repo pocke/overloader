@@ -25,7 +25,7 @@ module Overloader
           def __#{name}_#{index}_checker_inner(#{args_source}) end
           def __#{name}_#{index}_checker(*args)
             __#{name}_#{index}_checker_inner(*args)
-            true
+            #{type_check_code(def_node, name)}
           rescue ArgumentError
             false
           end
@@ -49,6 +49,17 @@ module Overloader
           end
         RUBY
       end
+    end
+
+    def type_check_code(def_node, method_name)
+      return 'true' unless defined?(::Overloader::Type)
+
+      comment = def_node.comment(path: absolute_path)
+      return 'true' unless comment
+
+      type = comment.sub(/^\s*#/, '')
+
+      "::Overloader::Type.callable?(#{type.dump}, self.class, #{method_name.inspect}, *args)"
     end
 
     private def absolute_path

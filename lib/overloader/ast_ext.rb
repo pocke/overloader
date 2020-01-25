@@ -21,6 +21,8 @@ module Overloader
       end
 
       def comment(content: nil, path: nil)
+        raise ArgumentError.new("content or path is required") unless content || path
+
         content ||= file_content(path)
         l = first_lineno - 2
 
