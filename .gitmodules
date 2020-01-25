@@ -1,0 +1,3 @@
+[submodule "vendor/ruby-signature"]
+	path = vendor/ruby-signature
+	url = git@github.com:ruby/ruby-signature.git
