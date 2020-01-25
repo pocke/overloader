@@ -8,9 +8,10 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Masataka Pocke Kuwabara"]
   spec.email         = ["kuwabara@pocke.me"]
 
-  spec.summary       = %q{}
-  spec.description   = %q{}
+  spec.summary       = %q{Overload for Ruby}
+  spec.description   = %q{Overload for Ruby. DO NOT USE THIS LIBRARY FOR PRODUCTION}
   spec.homepage      = "https://github.com/pocke/overloader"
+  spec.license       = 'CC0-1.0'
 
   # spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
 
