@@ -42,7 +42,13 @@ p a.foo(1, 2) # => "two args"
 
 ## Advanced Usage: types
 
-You can define overload with types. This feature requires Ruby 2.7 or later.
+You can define overload with types.
+
+This feature requires the following things.
+
+* Ruby 2.7 or greater
+* [ruby-signature](https://github.com/ruby/ruby-signature) gem
+  * This gem has not been published to RubyGems.org. So you need to install it manually.
 
 First, add `require 'overloader/type'`.
 Then, define the method type with RBS syntax. https://github.com/ruby/ruby-signature
