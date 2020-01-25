@@ -20,6 +20,20 @@ module Overloader
         file_content(path)[first_index(path)..last_index(path)]
       end
 
+      def comment(content: nil, path: nil)
+        raise ArgumentError.new("content or path is required") unless content || path
+
+        content ||= file_content(path)
+        l = first_lineno - 2
+
+        res = []
+        while (comment = content.lines[l])&.match?(/^\s*#/)
+          res.unshift comment
+          l -= 1
+        end
+        res.empty? ? nil : res.join
+      end
+
       # method node ext
 
       def method_body

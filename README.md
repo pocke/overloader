@@ -40,6 +40,45 @@ p a.foo(1) # => "one args"
 p a.foo(1, 2) # => "two args"
 ```
 
+## Advanced Usage: types
+
+You can define overload with types.
+
+This feature requires the following things.
+
+* Ruby 2.7 or greater
+* [ruby-signature](https://github.com/ruby/ruby-signature) gem
+  * This gem has not been published to RubyGems.org. So you need to install it manually.
+
+First, add `require 'overloader/type'`.
+Then, define the method type with RBS syntax. https://github.com/ruby/ruby-signature
+
+
+```ruby
+require 'overloader'
+require 'overloader/type'
+
+class A
+  extend Overloader
+  overload do
+    # (String, Integer) -> untyped
+    def foo(x, y) 'str int' end
+
+    # (Integer, String) -> untyped
+    def foo(x, y) 'int str' end
+
+    # (Symbol, Symbol) -> untyped
+    def foo(x, y) 'sym sym' end
+  end
+end
+
+a = A.new
+p a.foo('bar', 42) # => "str int"
+p a.foo(42, 'baz') # => "int str"
+p a.foo(:a, :b)    # => "sym sym"
+p a.foo(:a, 42)    # => ArgumentError
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
