@@ -4,3 +4,4 @@ source "https://rubygems.org"
 gemspec
 
 gem 'ruby-signature', path: 'vendor/ruby-signature'
+gem 'ruby2_keywords'

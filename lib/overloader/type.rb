@@ -1,6 +1,8 @@
 gem 'ruby-signature'
+gem 'ruby2_keywords'
 require 'ruby/signature'
 require 'ruby/signature/test'
+require 'ruby2_keywords'
 
 require_relative 'type/checker'
 
