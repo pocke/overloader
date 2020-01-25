@@ -5,3 +5,4 @@ gemspec
 
 gem 'ruby-signature', path: 'vendor/ruby-signature'
 gem 'ruby2_keywords'
+gem 'racc'
